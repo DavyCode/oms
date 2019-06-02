@@ -8,13 +8,14 @@ import app from '../app';
 import debugLib from 'debug';
 import http from 'http';
 import chalk from 'chalk';
+import { PORT, NODE_ENV, HOST_NAME } from '../config/env'
 
 const debug = debugLib('oms:server');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '5000');
+var port = normalizePort(PORT);
 app.set('port', port);
 
 /**
@@ -27,9 +28,13 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, () => {
-  console.info(chalk.bold.yellow("Server up on port :", port))
-  console.info(chalk.bold.red("Build something people love 🔥🔥🔥🔥🔥√√√√√√√√√"));
+server.listen(port, (err) => {
+  if (err) {
+    console.error(chalk.bold.red('ERROR - Unable to start server.'))
+  } else {
+    console.info(chalk.bold.yellow(`INFO - Server spitting 🔥🔥🔥🔥🔥 on - ${ HOST_NAME }:${ port } [${ NODE_ENV }]`))
+    console.info(chalk.bold.green("Build something people love √√√√√√√√√"));  
+  }
 });
 server.on('error', onError);
 server.on('listening', onListening);

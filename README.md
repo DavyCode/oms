@@ -4,7 +4,7 @@
 
 #### Receive orders and manage your business process.
 - **Api** built with Node, GraphQL, Express, Mongo (NoSQL) and JWT Auth
-- **Client** to be built with React and Redux along with Server Side Rendering (SSR) / SEO friendly
+- **Client** to be built with React and Redux, along with Server Side Rendering (SSR) / SEO friendly and code splitting
 - **Mobile** (Android and iOS) Native App build with React Native
 - Written in ES6+ using Babel + Webpack
 

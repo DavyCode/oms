@@ -9,8 +9,6 @@ var app = express();
 const router = express.Router();
 // Register routes
 routeHandler(router);
-console.log({routeHandler})
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,4 +36,3 @@ app.use(router);
 // });
 
 export default app;
-// module.exports = app;
