@@ -16,7 +16,7 @@
   Look in .env.sample file to setup required environmental variables in a .env file
   npm install
   npm run watch
-  Test Server at http://localhost:${PORT} with ![postman](https://www.getpostman.com)
+  Test Server at http://localhost:${PORT} with [postman](https://www.getpostman.com)
 
   npm start
   Builds the app for production to the dist folder.
