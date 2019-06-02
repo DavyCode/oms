@@ -2,6 +2,6 @@
 
 // Add access to the router objects to each route
 
-module.exports = router => {
+module.exports = function (router) {
   require('./home')(router);
-}; 
+};
