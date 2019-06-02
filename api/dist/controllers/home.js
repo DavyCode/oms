@@ -2,6 +2,8 @@
 
 module.exports = {
   Test: function Test(req, res, next) {
-    res.send("ORDERS MANAGEMENT SYSTEM");
+    res.status(200).json({
+      message: "ORDERS MANAGEMENT SYSTEM"
+    });
   }
 };

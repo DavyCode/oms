@@ -7,6 +7,7 @@
 import app from '../app';
 import debugLib from 'debug';
 import http from 'http';
+import chalk from 'chalk';
 
 const debug = debugLib('oms:server');
 /**
@@ -27,8 +28,8 @@ var server = http.createServer(app);
  */
 
 server.listen(port, () => {
-  console.log("Server up on port :", port)
-  console.log("Build something people love √√√√√√√√√√√√√√√√√√√√√√")
+  console.info(chalk.bold.yellow("Server up on port :", port))
+  console.info(chalk.bold.red("Build something people love 🔥🔥🔥🔥🔥√√√√√√√√√"));
 });
 server.on('error', onError);
 server.on('listening', onListening);

@@ -1,55 +1,54 @@
-'use strict';
+"use strict";
 
-var _express = require('express');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
-var _express2 = _interopRequireDefault(_express);
+var _httpErrors = _interopRequireDefault(require("http-errors"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _express = _interopRequireDefault(require("express"));
 
-var createError = require('http-errors');
+var _path = _interopRequireDefault(require("path"));
 
-var path = require('path');
-var logger = require('morgan');
+var _morgan = _interopRequireDefault(require("morgan"));
 
-var app = (0, _express2.default)();
-var router = _express2.default.Router();
+var _index = _interopRequireDefault(require("./router/index"));
 
-require('./router')(router);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-console.log("heyyyyyyyyyy");
+var app = (0, _express["default"])();
 
-app.use(logger('dev'));
-app.use(_express2.default.json());
-app.use(_express2.default.urlencoded({ extended: false }));
+var router = _express["default"].Router(); // Register routes
 
+
+(0, _index["default"])(router);
+console.log({
+  routeHandler: _index["default"]
+});
+app.use((0, _morgan["default"])('dev'));
+app.use(_express["default"].json());
+app.use(_express["default"].urlencoded({
+  extended: false
+}));
+app.use(_express["default"]["static"](_path["default"].join(__dirname, '../public')));
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type, Accept");
   res.header("Content-Type", "application/json");
+
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   } else {
     next();
   }
 });
+app.use(router); // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
-app.use(router);
+var _default = app; // module.exports = app;
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+exports["default"] = _default;
