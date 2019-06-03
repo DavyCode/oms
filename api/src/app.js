@@ -7,14 +7,42 @@ import express from "express";
 import path from "path";
 import logger from "morgan";
 import cors from "cors";
+import winston from "winston";
+/**
+ * Requiring `winston-mongodb` will expose
+ * `winston.transports.MongoDB`
+ */
+import "winston-mongodb";
 import routeHandler from "./router/index";
 import error from "./middleware/error";
+import { LOGS_DBURL, NODE_ENV } from "./config/env";
 
 var app = express();
 const router = express.Router();
 
+winston.exceptions.handle(
+  new winston.transports.File({ filename: "logs/uncaughtExceptions.log" })
+);
+
+process.on("unhandledRejection", ex => {
+  throw ex;
+});
+
+winston.configure({
+  transports: [
+    NODE_ENV !== "production"
+      ? new winston.transports.Console()
+      : new winston.transports.File({
+          filename: "logs/error.log",
+          level: "error"
+        }),
+    // new winston.transports.MongoDB({ db: LOGS_DBURL})
+    new winston.transports.File({ filename: "logs/logFile.log", level: "info" })
+  ]
+});
+
 /*
-  Register routes
+  Load routes
 */
 routeHandler(router);
 

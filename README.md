@@ -2,7 +2,7 @@
 
 # OMS
 
-#### Receive orders and manage your business process.
+#### Receive orders and manage your business processes.
 
 - **Api** built with Node, GraphQL, Express, Mongo (NoSQL) and JWT Auth
 - **Client** to be built with React and Redux, along with Server Side Rendering (SSR) / SEO friendly and code splitting
